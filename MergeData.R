@@ -73,6 +73,8 @@ if ("videostats" %in% datatables) {
       videostats$day <- as.POSIXct(videostats$day, format = "%Y-%m-%d")
 }
 
+# Save all tables
+save(list = datatables, file = "YouTube.RData")
 
 # Delete temporary objects
 rm(nextpart)
