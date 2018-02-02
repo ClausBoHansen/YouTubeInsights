@@ -27,6 +27,50 @@ for (datatable in datatables) {
       assign(datatable, select(get(datatable), -X))
 }
 
+
+# Set data types
+
+# captions
+if ("captions" %in% datatables) {
+      captions$lastUpdated <- as.POSIXct(captions$lastUpdated, format = "%Y-%m-%dT%H:%M:%S")
+}
+
+# localizations
+if ("localizations" %in% datatables) {
+      localizations$title <- as.character(localizations$title)
+      localizations$description <- as.character(localizations$description)
+      # UTF-8
+}
+
+# playbacklocations
+if ("playbacklocations" %in% datatables) {
+}
+
+# tags
+if ("tags" %in% datatables) {
+}
+
+# trafficsources
+if ("trafficsources" %in% datatables) {
+}
+
+# videoByCountryDetails
+if ("videoByCountryDetails" %in% datatables) {
+}
+
+# videoByCountryTotals
+if ("videoByCountryTotals" %in% datatables) {
+}
+
+# videos
+if ("videos" %in% datatables) {
+}
+
+# videostats
+if ("videostats" %in% datatables) {
+}
+
+
 # Delete temporary objects
 rm(nextpart)
 rm(datadir)
@@ -35,4 +79,8 @@ rm(datatables)
 rm(inputfile)
 rm(inputfiles)
 rm(filename)
-
+rm(countries)
+rm(earliestdate)
+rm(google.client.id)
+rm(google.client.secret)
+rm(latestdate)
