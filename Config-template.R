@@ -29,7 +29,6 @@ datatables <- c(
       "videostats"
 )
 
-
 # Data directory
 datadir <- "<data directory>"
 
