@@ -37,37 +37,40 @@ if ("captions" %in% datatables) {
 
 # localizations
 if ("localizations" %in% datatables) {
-      localizations$title <- as.character(localizations$title)
-      localizations$description <- as.character(localizations$description)
-      # UTF-8
+      localizations$title <- iconv(as.character(localizations$title), from = "UTF-8")
+      localizations$description <- iconv(as.character(localizations$description), from = "UTF-8")
 }
 
 # playbacklocations
 if ("playbacklocations" %in% datatables) {
+      playbacklocations$day <- as.POSIXct(playbacklocations$day, format = "%Y-%m-%d")
 }
 
 # tags
 if ("tags" %in% datatables) {
+      tags$tag <- iconv(as.character(tags$tag), from = "UTF-8")
 }
 
 # trafficsources
 if ("trafficsources" %in% datatables) {
+      trafficsources$day <- as.POSIXct(trafficsources$day, format = "%Y-%m-%d")
 }
 
 # videoByCountryDetails
 if ("videoByCountryDetails" %in% datatables) {
-}
-
-# videoByCountryTotals
-if ("videoByCountryTotals" %in% datatables) {
+      videoByCountryDetails$day <- as.POSIXct(videoByCountryDetails$day, format = "%Y-%m-%d")
 }
 
 # videos
 if ("videos" %in% datatables) {
+      videos$snippet.publishedAt <- as.POSIXct(videos$snippet.publishedAt, format = "%Y-%m-%d %H:%M:%S")
+      videos$snippet.title <- iconv(as.character(videos$snippet.title), from = "UTF-8")
+      videos$snippet.description <- iconv(as.character(videos$snippet.description), from = "UTF-8")
 }
 
 # videostats
 if ("videostats" %in% datatables) {
+      videostats$day <- as.POSIXct(videostats$day, format = "%Y-%m-%d")
 }
 
 
