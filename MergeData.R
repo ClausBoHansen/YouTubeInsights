@@ -63,6 +63,15 @@ if ("videoByCountryDetails" %in% datatables) {
 
 # videos
 if ("videos" %in% datatables) {
+      # Rename columns
+      setnames(videos, "snippet.publishedAt", "publishedAt")
+      setnames(videos, "snippet.channelId", "channelId")
+      setnames(videos, "snippet.title", "title")
+      setnames(videos, "snippet.description", "description")
+      setnames(videos, "snippet.channelTitle", "channelTitle")
+      setnames(videos, "snippet.position", "position")
+      setnames(videos, "snippet.resourceId.videoId", "videoId")
+      
       videos$snippet.publishedAt <- as.POSIXct(videos$snippet.publishedAt, format = "%Y-%m-%d %H:%M:%S")
       videos$snippet.title <- iconv(as.character(videos$snippet.title), from = "UTF-8")
       videos$snippet.description <- iconv(as.character(videos$snippet.description), from = "UTF-8")
@@ -70,6 +79,8 @@ if ("videos" %in% datatables) {
 
 # videostats
 if ("videostats" %in% datatables) {
+      # Rename columns
+      setnames(videostats, "video", "videoId")
       videostats$day <- as.POSIXct(videostats$day, format = "%Y-%m-%d")
 }
 
