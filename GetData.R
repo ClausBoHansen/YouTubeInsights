@@ -17,15 +17,16 @@ reportname <- NULL
 for (i in 1:nrow(extractChannels)) reportname <- paste(reportname, extractChannels[i]$channelName, sep = if (i == 1) "" else "-")
 reportname <- paste(earliestdate,latestdate,reportname, sep = ".")
 
-videos <- data.table(NULL)
-videostats <- data.table(NULL)
-videoByCountryTotals <- data.table(NULL)
-videoByCountryDetails <- data.table(NULL)
-captions <- data.table(NULL)
-tags <- data.table(NULL)
-localizations <- data.table(NULL)
-playbacklocations <- data.table(NULL)
-trafficsources <- data.table(NULL)
+videos                  <- data.table(NULL)
+videostats              <- data.table(NULL)
+videoByCountryTotals    <- data.table(NULL)
+videoByCountryDetails   <- data.table(NULL)
+captions                <- data.table(NULL)
+tags                    <- data.table(NULL)
+localizations           <- data.table(NULL)
+playbacklocations       <- data.table(NULL)
+trafficsources          <- data.table(NULL)
+subscribers             <- data.table(NULL)
 
 # For all channels
 for (channelno in 1:nrow(extractChannels)) {
@@ -42,8 +43,12 @@ for (channelno in 1:nrow(extractChannels)) {
             
       # Get all public videos, add columns for languages
       channelvideos <- cbind(get.videos(channelId), defaultLanguage = NA, defaultAudioLanguage = NA)
+      channelvideos$defaultLanguage <- as.character(channelvideos$defaultLanguage)
+      channelvideos$defaultAudioLanguage <- as.character(channelvideos$defaultAudioLanguage)
       videos <- rbind(videos, channelvideos)
-      
+
+      # Initialize variable to hold date for earliest published video
+      firstvideodate <- latestdate
 
       # Get stats for all videos in channel
       for (videono in 1:nrow(channelvideos)) {
@@ -56,6 +61,11 @@ for (channelno in 1:nrow(extractChannels)) {
                         
             # Get viewer interaction data (views, likes etc.)
             startdate <- max(earliestdate, format.POSIXct(channelvideos[videono,]$snippet.publishedAt, format = "%Y-%m-%d", usetz = FALSE))
+            
+            # Update firstvideodate if this video has earlier startdate
+            if (startdate < firstvideodate) {
+                  firstvideodate <- startdate
+            }
             if (startdate <= latestdate) {
                   # Get video stat totals and by country
                   if ("videostats" %in% datatables) {
@@ -129,7 +139,7 @@ for (channelno in 1:nrow(extractChannels)) {
                         localizations <- rbind(localizations, data.frame( videoId = videoId, language = languages[localizationindex], title = nextinfo$localizations[1,localizationindex]$title, description = nextinfo$localizations[1,localizationindex]$description ))
                   }
             } # Get localization data
-            
+
             # Add language information if set on video
             if (!is.null(nextinfo$snippet$defaultLanguage)) {
                   videos[which(videos$snippet.resourceId.videoId == videoId),]$defaultLanguage <- nextinfo$snippet$defaultLanguage
@@ -142,6 +152,17 @@ for (channelno in 1:nrow(extractChannels)) {
             
       } # For all videos in channel
 
+      
+      # Get channel subscribers
+      if ("subscribers" %in% datatables) {
+            nextsubscribers <- get.channel.subscribers(channelId, firstvideodate, latestdate)
+            # If results are returned
+            if (nrow(nextsubscribers)) {
+                  nextsubscribers <- cbind(channelId = channelId, nextsubscribers)
+                  subscribers <- rbind(subscribers, nextsubscribers)
+            }
+      }
+      
 } # For all channels
 
 

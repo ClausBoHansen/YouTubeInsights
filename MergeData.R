@@ -56,6 +56,11 @@ if ("trafficsources" %in% datatables) {
       trafficsources$day <- as.POSIXct(trafficsources$day, format = "%Y-%m-%d")
 }
 
+# subscribers
+if ("subscribers" %in% datatables) {
+      subscribers$day <- as.POSIXct(subscribers$day, format = "%Y-%m-%d")
+}
+
 # videoByCountryDetails
 if ("videoByCountryDetails" %in% datatables) {
       videoByCountryDetails$day <- as.POSIXct(videoByCountryDetails$day, format = "%Y-%m-%d")

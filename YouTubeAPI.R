@@ -171,6 +171,27 @@ get.video.trafficsources <- function(channelID, videoID, startdate, enddate) {
       API(pars_arguments = videoargs)
 }
 
+# Get subscribers gained and lost for specific channel
+get.channel.subscribers <- function(channelID, startdate, enddate) {
+      
+      videoargs <- list(ids = paste("channel==", channelID, sep = ""),
+                        `start-date` = startdate,
+                        `end-date` = enddate,
+                        metrics = "subscribersGained,subscribersLost",
+                        dimensions = "day",
+                        alt = "csv")
+      
+      API <- gar_api_generator("https://www.googleapis.com/youtube/analytics/v1/reports",
+                               "GET",
+                               pars_args = list(ids = "", `start-date` = "", `end-date` = "", metrics = "", dimensions = "", alt = ""),
+                               data_parse_function = function(x) {
+                                     return(read.csv(text = rawToChar(x)))
+                               }
+      )
+      
+      API(pars_arguments = videoargs)
+}
+
 
 # Get captions for a specific video
 get.video.captions <- function(videoID) {
