@@ -20,7 +20,6 @@ for (datatable in datatables) {
             if (file.size(filename) > 5) {
                   nextpart <- read.csv(filename)
             assign(datatable, rbind(get(datatable), nextpart))
-                  
             }
       }
       
@@ -86,7 +85,7 @@ if ("videostats" %in% datatables) {
 }
 
 # Save all tables
-save(list = datatables, file = datafile)
+save(list = append(datatables, "channels"), file = paste(datadir, datafile, sep = ""))
 
 # Delete temporary objects
 rm(nextpart)

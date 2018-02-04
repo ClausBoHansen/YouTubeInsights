@@ -148,7 +148,7 @@ for (channelno in 1:nrow(extractChannels)) {
 # Delete authentication token
 unlink(".httr-oauth")
 
-# Save data frames to disk
+# Save data tables to disk
 for (datatable in datatables) {
       write.csv(get(datatable), file = paste(datadir, datatable, ".", reportname, ".csv", sep = ""))
 }

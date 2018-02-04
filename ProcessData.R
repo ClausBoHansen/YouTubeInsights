@@ -5,8 +5,11 @@ library(data.table)
 library(dplyr)
 library(ggplot2)
 
+# Load configuration
+source("Config.R")
+
 # Load data
-load("YouTube.RData")
+load(paste(datadir, datafile, sep = ""))
 
 # views and minutes by channel and day
 CHANNELxDAY <- merge(videos, videostats, by = "videoId") %>%

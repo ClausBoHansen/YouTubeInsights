@@ -20,7 +20,6 @@ countries <- c("AR", "AT", "AU", "BE", "BR", "CA", "CH", "CL", "CZ", "DE", "DK",
 # Data tables to include in data extraction
 datatables <- c(
       "captions",
-      "channels",
       "localizations",
       "playbacklocations",
       "tags",
