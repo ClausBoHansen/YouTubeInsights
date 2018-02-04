@@ -19,17 +19,21 @@ CHANNELxDAY <- merge(videos, videostats, by = "videoId") %>%
       summarise(views = sum(views), minutes = sum(estimatedMinutesWatched), subscribersChange = sum(subscribersGained) - sum(subscribersLost))
 
 # Calculate subscribers
-CHANNELxDAY$subscribers <- 0
+SUBSCRIBERSxDAY <- merge(channels, subscribers, by = "channelId") %>% as.data.table()
+SUBSCRIBERSxDAY <- SUBSCRIBERSxDAY[order(channelName, day)]
+SUBSCRIBERSxDAY$subscribersChange <- SUBSCRIBERSxDAY$subscribersGained - SUBSCRIBERSxDAY$subscribersLost
+
+SUBSCRIBERSxDAY$subscribers <- 0
 previouschannel <- ""
 previoussum <- 0
-for (i in 1:nrow(CHANNELxDAY)) {
-      if (CHANNELxDAY[i, "channelName"] != previouschannel) {
+for (i in 1:nrow(SUBSCRIBERSxDAY)) {
+      if (SUBSCRIBERSxDAY[i, "channelName"] != previouschannel) {
             previoussum <- 0
       }
-      newsum <- CHANNELxDAY[i, "subscribersChange"] + previoussum
-      CHANNELxDAY[i, "subscribers"] <- newsum
+      newsum <- SUBSCRIBERSxDAY[i, "subscribersChange"] + previoussum
+      SUBSCRIBERSxDAY[i, "subscribers"] <- newsum
       previoussum <- newsum
-      previouschannel <- CHANNELxDAY[i, "channelName"]
+      previouschannel <- SUBSCRIBERSxDAY[i, "channelName"]
 }
 
 
@@ -41,9 +45,15 @@ ggplot(CHANNELxDAY, aes(x = day, y = views/1000)) +
       ggtitle("Views by channel") +
       labs(x = "Date", y = "Views per day [thousands]")
 
-ggplot(CHANNELxDAYxWATCHTIME, aes(x = day, y = minutes/60)) +
+ggplot(CHANNELxDAY, aes(x = day, y = minutes/60)) +
       geom_line() +
       facet_wrap(~ channelName, ncol = 3) +
       ggtitle("Watch time by channel") +
       labs(x = "Date", y = "Watch time per day [hours]")
+
+ggplot(SUBSCRIBERSxDAY, aes(x = day, y = subscribers)) +
+      geom_line() +
+      facet_wrap(~ channelName, ncol = 3) +
+      ggtitle("Subscribers") +
+      labs(x = "Date", y = "Total number of subscribers")
 
