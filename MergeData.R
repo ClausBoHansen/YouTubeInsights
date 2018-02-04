@@ -6,6 +6,7 @@
 library(data.table)
 library(dplyr)
 
+# Load configuration
 source("Config.R")
 
 # For all datatables
@@ -72,9 +73,9 @@ if ("videos" %in% datatables) {
       setnames(videos, "snippet.position", "position")
       setnames(videos, "snippet.resourceId.videoId", "videoId")
       
-      videos$snippet.publishedAt <- as.POSIXct(videos$snippet.publishedAt, format = "%Y-%m-%d %H:%M:%S")
-      videos$snippet.title <- iconv(as.character(videos$snippet.title), from = "UTF-8")
-      videos$snippet.description <- iconv(as.character(videos$snippet.description), from = "UTF-8")
+      videos$snippet.publishedAt <- as.POSIXct(videos$publishedAt, format = "%Y-%m-%d %H:%M:%S")
+      videos$snippet.title <- iconv(as.character(videos$title), from = "UTF-8")
+      videos$snippet.description <- iconv(as.character(videos$description), from = "UTF-8")
 }
 
 # videostats
@@ -85,7 +86,7 @@ if ("videostats" %in% datatables) {
 }
 
 # Save all tables
-save(list = datatables, file = "YouTube.RData")
+save(list = datatables, file = datafile)
 
 # Delete temporary objects
 rm(nextpart)
@@ -100,3 +101,5 @@ rm(earliestdate)
 rm(google.client.id)
 rm(google.client.secret)
 rm(latestdate)
+rm(datafile)
+

@@ -3,9 +3,11 @@
 
 # Channels to be included
 channels <- data.table(NULL)
-channels <- rbind(channels, data.frame(Channelname = "<Channelname1>",       ChannelID = "<ChannelID1>"))
-channels <- rbind(channels, data.frame(Channelname = "<Channelname2>",       ChannelID = "<ChannelID2>"))
+channels <- rbind(channels, data.frame(channelName = "<Channelname1>",       channelId = "<ChannelID1>", extract = TRUE))
+channels <- rbind(channels, data.frame(channelName = "<Channelname2>",       channelId = "<ChannelID2>", extract = TRUE))
 # etc.
+
+extractChannels <- channels[which(channels$extract)]
 
 # Date range
 earliestdate <- "1970-01-01"
@@ -31,6 +33,9 @@ datatables <- c(
 
 # Data directory
 datadir <- "<data directory>"
+
+# Data file
+datafile <- "YouTube.RData"
 
 # API credentials
 google.client.id = "<Your client ID>"

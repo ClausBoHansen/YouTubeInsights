@@ -14,7 +14,7 @@ source("YouTubeAPI.R")
 
 # Create reportname indicating channels and date range
 reportname <- NULL
-for (i in 1:nrow(channels)) reportname <- paste(reportname, channels[i]$Channelname, sep = if (i == 1) "" else "-")
+for (i in 1:nrow(extractChannels)) reportname <- paste(reportname, extractChannels[i]$channelName, sep = if (i == 1) "" else "-")
 reportname <- paste(earliestdate,latestdate,reportname, sep = ".")
 
 videos <- data.table(NULL)
@@ -28,20 +28,20 @@ playbacklocations <- data.table(NULL)
 trafficsources <- data.table(NULL)
 
 # For all channels
-for (channelno in 1:nrow(channels)) {
+for (channelno in 1:nrow(extractChannels)) {
 
       # Get channel ID and name for channel
-      ChannelID <- as.character(channels[channelno,]$ChannelID)
-      Channelname <- as.character(channels[channelno,]$Channelname)
+      channelId <- as.character(extractChannels[channelno,]$channelId)
+      channelName <- as.character(extractChannels[channelno,]$channelName)
       
       # Authenticate for this channel
-      cat("Authenticate access to the", Channelname, "channel in browser\n\n")
+      cat("Authenticate access to the", channelName, "channel in browser\n\n")
       # Request authorization token
       googleAuthR::gar_auth(new_user = TRUE)
       
             
       # Get all public videos, add columns for languages
-      channelvideos <- cbind(get.videos(ChannelID), defaultLanguage = NA, defaultAudioLanguage = NA)
+      channelvideos <- cbind(get.videos(channelId), defaultLanguage = NA, defaultAudioLanguage = NA)
       videos <- rbind(videos, channelvideos)
       
 
@@ -59,13 +59,13 @@ for (channelno in 1:nrow(channels)) {
             if (startdate <= latestdate) {
                   # Get video stat totals and by country
                   if ("videostats" %in% datatables) {
-                        videostats <- rbind(videostats, get.video.stats(ChannelID, videoId, startdate, latestdate))
-                        videoByCountryTotals <- rbind(videoByCountryTotals, get.video.countrytotals(ChannelID, videoId, startdate, latestdate))
+                        videostats <- rbind(videostats, get.video.stats(channelId, videoId, startdate, latestdate))
+                        videoByCountryTotals <- rbind(videoByCountryTotals, get.video.countrytotals(channelId, videoId, startdate, latestdate))
                   }
 
                   # Get video playback locations
                   if ("playbacklocations" %in% datatables) {
-                        nextplaybacklocations <- get.video.playbacklocations(ChannelID, videoId, startdate, latestdate)
+                        nextplaybacklocations <- get.video.playbacklocations(channelId, videoId, startdate, latestdate)
                         # If results are returned
                         if (nrow(nextplaybacklocations)) {
                               nextplaybacklocations <- cbind(video = videoId, nextplaybacklocations)
@@ -75,7 +75,7 @@ for (channelno in 1:nrow(channels)) {
                   
                   # Get video traffic sources
                   if ("trafficsources" %in% datatables) {
-                        nexttrafficsources <- get.video.trafficsources(ChannelID, videoId, startdate, latestdate)
+                        nexttrafficsources <- get.video.trafficsources(channelId, videoId, startdate, latestdate)
                         # If results are returned
                         if (nrow(nexttrafficsources)) {
                               nexttrafficsources <- cbind(video = videoId, nexttrafficsources)
@@ -86,7 +86,7 @@ for (channelno in 1:nrow(channels)) {
                   # Get stats by day and country for selected countries
                   if ("videoByCountryDetails" %in% datatables) {
                         for (country in countries) {
-                              details <- get.video.countrydetails(ChannelID, videoId, country, startdate, latestdate)
+                              details <- get.video.countrydetails(channelId, videoId, country, startdate, latestdate)
                               # If results are returned
                               if (nrow(details)) {
                                     details <- cbind(video = videoId, country = country, details)
