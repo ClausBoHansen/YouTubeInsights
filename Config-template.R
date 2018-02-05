@@ -9,6 +9,12 @@ channels <- rbind(channels, data.frame(channelName = "<Channelname2>",       cha
 
 extractChannels <- channels[which(channels$extract)]
 
+# Value model parameters
+minuteValue             <- 0.5      # Value (€) of one minute video played
+maximumSlope            <- -0.01    # Slope values greater than this limit will be considered constant at intercept value
+constantTrafficDuration <- 360      # Constant traffic videos will be attributes traffic this many days, if age is less than this number
+minimumObservations     <- 50       # Minimum number of days required to estimate video value
+
 # Date range
 earliestdate <- "1970-01-01"
 latestdate <-   "2018-01-22"
@@ -22,6 +28,7 @@ datatables <- c(
       "captions",
       "localizations",
       "playbacklocations",
+      "subscribers",
       "tags",
       "trafficsources",
       "videoByCountryDetails",

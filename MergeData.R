@@ -77,9 +77,9 @@ if ("videos" %in% datatables) {
       setnames(videos, "snippet.position", "position")
       setnames(videos, "snippet.resourceId.videoId", "videoId")
       
-      videos$snippet.publishedAt <- as.POSIXct(videos$publishedAt, format = "%Y-%m-%d %H:%M:%S")
-      videos$snippet.title <- iconv(as.character(videos$title), from = "UTF-8")
-      videos$snippet.description <- iconv(as.character(videos$description), from = "UTF-8")
+      videos$publishedAt <- as.POSIXct(videos$publishedAt, format = "%Y-%m-%d %H:%M:%S")
+      videos$title <- iconv(as.character(videos$title), from = "UTF-8")
+      videos$description <- iconv(as.character(videos$description), from = "UTF-8")
 }
 
 # videostats
@@ -105,5 +105,6 @@ rm(earliestdate)
 rm(google.client.id)
 rm(google.client.secret)
 rm(latestdate)
-rm(datafile)
+rm(rawfile)
+rm(processedfile)
 
