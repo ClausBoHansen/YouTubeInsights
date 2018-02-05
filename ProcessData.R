@@ -3,13 +3,15 @@
 # Load libraries
 library(data.table)
 library(dplyr)
-library(ggplot2)
 
 # Load configuration
 source("Config.R")
 
 # Load data
-load(paste(datadir, datafile, sep = ""))
+load(paste(datadir, rawfile, sep = ""))
+
+# Initialize list of data tables to include in processed data
+processedtables <- append(datatables, "channels")
 
 # views and watch time by channel and day
 CHANNELxDAY <- merge(videos, videostats, by = "videoId") %>%
@@ -17,6 +19,9 @@ CHANNELxDAY <- merge(videos, videostats, by = "videoId") %>%
       as.data.table() %>%
       group_by(channelName, day) %>%
       summarise(views = sum(views), minutes = sum(estimatedMinutesWatched), subscribersChange = sum(subscribersGained) - sum(subscribersLost))
+
+processedtables <- append(processedtables, "CHANNELxDAY")
+
 
 # Calculate subscribers
 SUBSCRIBERSxDAY <- merge(channels, subscribers, by = "channelId") %>% as.data.table()
@@ -36,24 +41,8 @@ for (i in 1:nrow(SUBSCRIBERSxDAY)) {
       previouschannel <- SUBSCRIBERSxDAY[i, "channelName"]
 }
 
+processedtables <- append(processedtables, "SUBSCRIBERSxDAY")
 
-# Move to presentation
 
-ggplot(CHANNELxDAY, aes(x = day, y = views/1000)) +
-      geom_line() +
-      facet_wrap(~ channelName, ncol = 3) +
-      ggtitle("Views by channel") +
-      labs(x = "Date", y = "Views per day [thousands]")
-
-ggplot(CHANNELxDAY, aes(x = day, y = minutes/60)) +
-      geom_line() +
-      facet_wrap(~ channelName, ncol = 3) +
-      ggtitle("Watch time by channel") +
-      labs(x = "Date", y = "Watch time per day [hours]")
-
-ggplot(SUBSCRIBERSxDAY, aes(x = day, y = subscribers)) +
-      geom_line() +
-      facet_wrap(~ channelName, ncol = 3) +
-      ggtitle("Subscribers") +
-      labs(x = "Date", y = "Total number of subscribers")
-
+# Save all tables
+save(list = processedtables, file = paste(datadir, processedfile, sep = ""))

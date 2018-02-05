@@ -90,7 +90,7 @@ if ("videostats" %in% datatables) {
 }
 
 # Save all tables
-save(list = append(datatables, "channels"), file = paste(datadir, datafile, sep = ""))
+save(list = append(datatables, "channels"), file = paste(datadir, rawfile, sep = ""))
 
 # Delete temporary objects
 rm(nextpart)

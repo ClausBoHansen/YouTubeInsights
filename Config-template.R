@@ -33,8 +33,9 @@ datatables <- c(
 # Data directory
 datadir <- "<data directory>"
 
-# Data file
-datafile <- "YouTube.RData"
+# Data files
+rawfile <- "rawData.RData"
+processedfile <- "processedData.RData"
 
 # API credentials
 google.client.id = "<Your client ID>"
