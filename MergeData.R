@@ -107,4 +107,6 @@ rm(google.client.secret)
 rm(latestdate)
 rm(rawfile)
 rm(processedfile)
+rm(maxDaysSinceObservation)
+rm(minimumMinsPerDay)
 
