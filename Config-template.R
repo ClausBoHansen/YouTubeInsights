@@ -11,9 +11,11 @@ extractChannels <- channels[which(channels$extract)]
 
 # Value model parameters
 minuteValue             <- 0.5      # Value (€) of one minute video played
-maximumSlope            <- -0.01    # Slope values greater than this limit will be considered constant at intercept value
-constantTrafficDuration <- 360      # Constant traffic videos will be attributes traffic this many days, if age is less than this number
-minimumObservations     <- 50       # Minimum number of days required to estimate video value
+standardLifetime        <- 360      # The average expected lifetime for a video (days)
+maximumLifetime         <- 1080     # The maximum lifetime for a video (days). Estimation of future traffic will not exceed this limit.
+minimumObservations     <- 90       # Minimum number of days required to estimate video value
+minimumMinsPerDay       <- 10       # When average mininutes per day drops below this level, constant prediction is used
+maxDaysSinceObservation <- 10       # If there has not been an observation for this number of days, no future value estimate will be added
 
 # Date range
 earliestdate <- "1970-01-01"
