@@ -109,4 +109,6 @@ rm(rawfile)
 rm(processedfile)
 rm(maxDaysSinceObservation)
 rm(minimumMinsPerDay)
-
+rm(maximumLifetime)
+rm(minimumObservations)
+rm(standardLifetime)
