@@ -15,11 +15,6 @@ load(paste(datadir, rawfile, sep = ""))
 # Initialize list of data tables to include in processed data
 processedtables <- append(datatables, "channels")
 processedtables <- append(processedtables, "minuteValue")
-processedtables <- append(processedtables, "standardLifetime")
-processedtables <- append(processedtables, "maximumLifetime")
-processedtables <- append(processedtables, "minimumObservations")
-processedtables <- append(processedtables, "maxDaysSinceObservation")
-processedtables <- append(processedtables, "minimumMinsPerDay")
 
 
 # views and watch time by channel and day
