@@ -82,10 +82,25 @@ SOURCExCHANNEL <- merge(trafficsources, videos, by.x = "video", by.y = "videoId"
       group_by(channelName,insightTrafficSourceType, day) %>%
       summarise(estimatedMinutesWatched = sum(estimatedMinutesWatched)) %>%
       filter(estimatedMinutesWatched > 0)
-      
+
 processedtables <- append(processedtables, "SOURCExCHANNEL")
+
+
+########################################################################
+# Views and minutes by country
+COUNTRYxCHANNEL <- merge(videoByCountryDetails, videos, by.x = "video", by.y = "videoId") %>%
+      merge(channels, by = "channelId") %>%
+      subset(select = c(country, day, views, estimatedMinutesWatched, channelName)) %>%
+      group_by(channelName,country, day) %>%
+      summarise(estimatedMinutesWatched = sum(estimatedMinutesWatched), views = sum(views)) %>%
+      filter(estimatedMinutesWatched > 0 & views > 0)
+
+processedtables <- append(processedtables, "COUNTRYxCHANNEL")
+
 
 
 ########################################################################
 # Save all tables
 save(list = processedtables, file = paste(datadir, processedfile, sep = ""))
+
+
