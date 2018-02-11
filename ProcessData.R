@@ -98,6 +98,46 @@ COUNTRYxCHANNEL <- merge(videoByCountryDetails, videos, by.x = "video", by.y = "
 processedtables <- append(processedtables, "COUNTRYxCHANNEL")
 
 
+########################################################################
+# Internet users by country
+# If an API or downloadable file is found, this should be moved to GetData.R
+
+# Source: http://www.internetworldstats.com/stats4.htm
+INTERNETUSERSxCOUNTRY <- data.table(NULL)
+
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "AR", internetUsers = 34785206))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "AT", internetUsers = 7273168))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "AU", internetUsers = 21743803))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "BE", internetUsers = 10060745))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "BR", internetUsers = 139111185))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "CA", internetUsers = 33000381))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "CH", internetUsers = 7558796))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "CL", internetUsers = 14108392))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "CZ", internetUsers = 9323428))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "DE", internetUsers = 72290285))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "DK", internetUsers = 5534770))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "ES", internetUsers = 40148353))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "FI", internetUsers = 5125678))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "FR", internetUsers = 56367330))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "GB", internetUsers = 62091419))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "HR", internetUsers = 3133485))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "IE", internetUsers = 4453436))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "IT", internetUsers = 51836798))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "MX", internetUsers = 69000000))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "NL", internetUsers = 16143879))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "NO", internetUsers = 5311892))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "NZ", internetUsers = 4084520))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "PL", internetUsers = 28267099))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "PT", internetUsers = 7430762))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "SE", internetUsers = 9216226))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "SI", internetUsers = 1563795))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "SK", internetUsers = 4629641))
+INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "US", internetUsers = 286942362))
+
+
+processedtables <- append(processedtables, "INTERNETUSERSxCOUNTRY")
+
+
 
 ########################################################################
 # Save all tables
