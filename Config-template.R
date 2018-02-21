@@ -25,6 +25,26 @@ latestdate <-   "2018-01-22"
 countries <- c("AR", "AT", "AU", "BE", "BR", "CA", "CH", "CL", "CZ", "DE", "DK", "ES", "FI", "FR", "GB",
                "HR", "IE", "IT", "MX", "NL", "NO", "NZ", "PL", "PT", "SE", "SI", "SK", "US")
 
+# Countries/languages to be included in analysis of effect of subtitles
+countryLanguages <- data.table(NULL)
+countryLanguages <- rbind(countryLanguages, data.frame(country = "AT", language = "de"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "AU", language = "en"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "DE", language = "de"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "DK", language = "da"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "ES", language = "es"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "FI", language = "fi"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "FR", language = "fr"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "GB", language = "en"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "HR", language = "hr"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "IE", language = "en"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "IT", language = "it"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "NL", language = "nl"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "NO", language = "no"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "NZ", language = "en"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "PL", language = "pl"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "SV", language = "sv"))
+countryLanguages <- rbind(countryLanguages, data.frame(country = "US", language = "en"))
+
 # Data tables to include in data extraction
 datatables <- c(
       "captions",

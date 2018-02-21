@@ -134,8 +134,19 @@ INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "SI", inter
 INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "SK", internetUsers = 4629641))
 INTERNETUSERSxCOUNTRY <- rbind(INTERNETUSERSxCOUNTRY, list(country = "US", internetUsers = 286942362))
 
-
 processedtables <- append(processedtables, "INTERNETUSERSxCOUNTRY")
+
+
+########################################################################
+# Captions by video and country
+VIDEOxCAPTION <- merge(videoByCountryTotals, countryLanguages, by = "country") %>%
+      merge(captions, by.x = c("video", "language"), by.y = c("videoId", "language"), all.x = TRUE) %>%
+      subset(select = c(video, language, country, views, estimatedMinutesWatched, averageViewPercentage, trackKind, status))
+
+VIDEOxCAPTION[which(status == "serving")]$status <- "caption"
+VIDEOxCAPTION[which(is.na(status))]$status <- "no caption"
+
+processedtables <- append(processedtables, "VIDEOxCAPTION")
 
 
 
