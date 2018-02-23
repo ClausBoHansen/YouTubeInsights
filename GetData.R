@@ -41,8 +41,18 @@ for (channelno in 1:nrow(extractChannels)) {
       googleAuthR::gar_auth(new_user = TRUE)
       
             
-      # Get all public videos, add columns for languages
-      channelvideos <- cbind(get.videos(channelId), defaultLanguage = NA, defaultAudioLanguage = NA)
+      # Get all public videos, add detail columns
+      channelvideos <- cbind(get.videos(channelId),
+                             defaultLanguage = as.character(NA),
+                             defaultAudioLanguage = as.character(NA),
+                             thumbnail = as.character(NA),
+                             duration = as.character(NA),
+                             dimension = as.character(NA),
+                             definition = as.character(NA),
+                             caption = as.character(NA),
+                             projection = as.character(NA),
+                             hasCustomThumbnail = as.logical(NA))
+      
       channelvideos$defaultLanguage <- as.character(channelvideos$defaultLanguage)
       channelvideos$defaultAudioLanguage <- as.character(channelvideos$defaultAudioLanguage)
       videos <- rbind(videos, channelvideos)
@@ -148,7 +158,35 @@ for (channelno in 1:nrow(extractChannels)) {
             if (!is.null(nextinfo$snippet$defaultAudioLanguage)) {
                   videos[which(videos$snippet.resourceId.videoId == videoId),]$defaultAudioLanguage <- nextinfo$snippet$defaultAudioLanguage
             }
+
+            # Add content details
+            if (!is.null(nextinfo$contentDetails$duration)) {
+                  videos[which(videos$snippet.resourceId.videoId == videoId),]$duration <- nextinfo$contentDetails$duration
+            }
             
+            if (!is.null(nextinfo$contentDetails$dimension)) {
+                  videos[which(videos$snippet.resourceId.videoId == videoId),]$dimension <- nextinfo$contentDetails$dimension
+            }
+            
+            if (!is.null(nextinfo$contentDetails$definition)) {
+                  videos[which(videos$snippet.resourceId.videoId == videoId),]$definition <- nextinfo$contentDetails$definition
+            }
+            
+            if (!is.null(nextinfo$contentDetails$caption)) {
+                  videos[which(videos$snippet.resourceId.videoId == videoId),]$caption <- nextinfo$contentDetails$caption
+            }
+            
+            if (!is.null(nextinfo$contentDetails$projection)) {
+                  videos[which(videos$snippet.resourceId.videoId == videoId),]$projection <- nextinfo$contentDetails$projection
+            }
+            
+            if (!is.null(nextinfo$contentDetails$hasCustomThumbnail)) {
+                  videos[which(videos$snippet.resourceId.videoId == videoId),]$hasCustomThumbnail <- nextinfo$contentDetails$hasCustomThumbnail
+            }
+            
+            if (!is.null(nextinfo$snippet$thumbnails$maxres$url)) {
+                  videos[which(videos$snippet.resourceId.videoId == videoId),]$thumbnail <- nextinfo$snippet$thumbnails$maxres$url
+            }
             
       } # For all videos in channel
 

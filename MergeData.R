@@ -80,6 +80,14 @@ if ("videos" %in% datatables) {
       videos$publishedAt <- as.POSIXct(videos$publishedAt, format = "%Y-%m-%d %H:%M:%S")
       videos$title <- iconv(as.character(videos$title), from = "UTF-8")
       videos$description <- iconv(as.character(videos$description), from = "UTF-8")
+      
+      # Calculate video duration in seconds
+      videos$duration <- 3600 * as.integer(gsub("PT((\\d+)H)?((\\d+)M)?((\\d+)S)?", "0\\2", as.character(videos$duration))) +
+                        60 * as.integer(gsub("PT((\\d+)H)?((\\d+)M)?((\\d+)S)?", "0\\4", as.character(videos$duration))) +
+                        as.integer(gsub("PT((\\d+)H)?((\\d+)M)?((\\d+)S)?", "0\\6", as.character(videos$duration)))
+      
+      videos$caption <- as.logical(videos$caption)
+
 }
 
 # videostats

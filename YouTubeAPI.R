@@ -45,14 +45,12 @@ get.videos <- function(Channel_ID) {
       )
       videosJSON <- API(pars_arguments = videoargs)
       videos <- flatten(videosJSON$items)
-#print(names(videos))
-      
+
       # If result is paginated, load rest of pages
       while (!is.null(videosJSON$nextPageToken)) {
             videoargs <- list(part = "snippet", maxResults = 50, pageToken = videosJSON$nextPageToken, playlistId = uploadsPlaylistId, fields = fieldslist)
             videosJSON <- API(pars_arguments = videoargs)
             nextvideos <- flatten(videosJSON$items)
-#print(names(nextvideos))
             videos <- rbind(videos, nextvideos)
       }
       videos$snippet.publishedAt <- as.POSIXct(videos$snippet.publishedAt, format = "%Y-%m-%dT%H:%M:%S", tz = "UTC")
@@ -214,7 +212,8 @@ get.video.captions <- function(videoID) {
 get.video.info <- function(videoID) {
       
       # Find uploads playlist ID
-      videoargs <- list(part = "snippet,localizations", id = videoID)
+#      videoargs <- list(part = "snippet,localizations", id = videoID)
+      videoargs <- list(part = "snippet,localizations,contentDetails", id = videoID)
       API <- gar_api_generator("https://www.googleapis.com/youtube/v3/videos",
                                "GET",
                                pars_args = list(part = "", id = ""),
