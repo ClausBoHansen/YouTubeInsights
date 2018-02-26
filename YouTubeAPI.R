@@ -223,4 +223,3 @@ get.video.info <- function(videoID) {
       
       API(pars_arguments = videoargs)
 }
-
