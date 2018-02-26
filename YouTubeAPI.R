@@ -212,7 +212,6 @@ get.video.captions <- function(videoID) {
 get.video.info <- function(videoID) {
       
       # Find uploads playlist ID
-#      videoargs <- list(part = "snippet,localizations", id = videoID)
       videoargs <- list(part = "snippet,localizations,contentDetails", id = videoID)
       API <- gar_api_generator("https://www.googleapis.com/youtube/v3/videos",
                                "GET",
