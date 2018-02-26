@@ -151,6 +151,25 @@ VIDEOxCAPTION[which(is.na(status))]$status <- "no caption"
 processedtables <- append(processedtables, "VIDEOxCAPTION")
 
 
+########################################################################
+# Set video type
+VIDEOxTYPE <- videos %>% subset(select = -c(position))
+VIDEOxTYPE$durationtype <- as.character(NA)
+
+# For all videos
+for (i in 1:nrow(VIDEOxTYPE)) {
+      if (VIDEOxTYPE[i,]$duration < 120) {
+            type <- "short"
+      }
+      else {
+            type <- "long"
+      }
+      VIDEOxTYPE[i,]$durationtype <- type
+}
+
+processedtables <- append(processedtables, "VIDEOxTYPE")
+
+
 
 ########################################################################
 # Save all tables
