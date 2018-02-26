@@ -9,6 +9,7 @@ library(dplyr)
 # Load configuration
 source("Config.R")
 
+
 # For all datatables
 for (datatable in datatables) {
       assign(datatable, data.table(NULL))
