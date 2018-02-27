@@ -1,0 +1,40 @@
+***********************************
+Dimensions
+***********************************
+
+insightTrafficSourceType
+
+Data in the report is aggregated based on the referrer type, which describes the manner in which users reached the video. Possible values for this dimension are:
+
+ADVERTISING – The viewer was referred to the video by an advertisement. If you filter based on this traffic source, the insightTrafficSourceDetail field identifies the type of advertisement.
+
+ANNOTATION – Viewers reached the video by clicking on an annotation in another video.
+
+CAMPAIGN_CARD – Views originated from claimed, user-uploaded videos that the content owner used to promote the viewed content. This traffic source is only supported for content owner reports.
+
+END_SCREEN – The views were referred from the end screen of another video.
+
+EXT_URL – The video views were referred from a link on another website. If you filter based on this traffic source, the insightTrafficSourceDetail field identifies the web page. This traffic source includes referrals from Google search results.
+
+NO_LINK_EMBEDDED – The video was embedded on another website when it was viewed.
+
+NO_LINK_OTHER – YouTube did not identify a referrer for the traffic. This category encompasses direct traffic to a video as well as traffic on mobile apps.
+
+NOTIFICATION – The video views were referred from an email or notification from YouTube.
+
+PLAYLIST – The video views occurred while the video was being played as part of a playlist. Note that this traffic source is different from YT_PLAYLIST_PAGE, which indicates that the views originated from the page that lists all of the videos in the playlist.
+
+PROMOTED – The video views were referred from an unpaid YouTube promotion, such as the YouTube "Spotlight Videos" page.
+
+RELATED_VIDEO – The video views were referred from a related video listing on another video watch page. If you filter based on this traffic source, the insightTrafficSourceDetail field specifies the video ID for that video.
+
+SUBSCRIBER – The video views were referred from feeds on the YouTube homepage or from YouTube subscription features. If you filter based on this traffic source, the insightTrafficSourceDetail field specifies the homepage feed items or other page from which views were referred.
+
+YT_CHANNEL – The video views occurred on a channel page. If you filter based on this traffic source, the insightTrafficSourceDetail field specifies the channel ID for that channel.
+
+YT_OTHER_PAGE – The video views were referred from a link other than a search result or related video link that appeared on a YouTube page. If you filter based on this traffic source, the insightTrafficSourceDetail field identifies the page.
+
+YT_PLAYLIST_PAGE – The video views originated from a page that lists all of the videos in a playlist. Note that this traffic source is different from PLAYLIST, which indicates that the views occurred while the video was being played as part of a playlist.
+
+YT_SEARCH – The video views were referred from YouTube search results. If you filter based on this traffic source, the insightTrafficSourceDetail field specifies the search term.
+
