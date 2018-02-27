@@ -37,4 +37,3 @@ YT_OTHER_PAGE – The video views were referred from a link other than a search 
 YT_PLAYLIST_PAGE – The video views originated from a page that lists all of the videos in a playlist. Note that this traffic source is different from PLAYLIST, which indicates that the views occurred while the video was being played as part of a playlist.
 
 YT_SEARCH – The video views were referred from YouTube search results. If you filter based on this traffic source, the insightTrafficSourceDetail field specifies the search term.
-
